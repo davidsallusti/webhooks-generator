@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: webhooks-generator
+    runtime: node
+    plan: free
+    buildCommand: npm ci && npm run build
+    startCommand: npm start
+    healthCheckPath: /api/health
+    autoDeploy: false
+    envVars:
+      - key: NODE_VERSION
+        value: 24.14.1
+      - key: NODE_ENV
+        value: production
+      - key: WEBHOOKS_DB_PATH
+        value: /tmp/webhooks.sqlite
